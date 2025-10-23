@@ -3,6 +3,7 @@
 import { useIngredientsStore } from "@/store/ingredients-store";
 import { useState } from "react";
 import type { RecipeFinderProps } from "@/types";
+import { X } from "lucide-react";
 
 export default function RecipeFinder({
   onClickSearchAction,
@@ -14,21 +15,34 @@ export default function RecipeFinder({
     useIngredientsStore();
   const [currentIngredient, setCurrentIngredient] = useState<string>("");
 
+  const handleAddIngredient = (ingredient: string) => {
+    const trimmedIngredient = ingredient.trim();
+    if (trimmedIngredient !== "") {
+      addIngredient(trimmedIngredient);
+      setCurrentIngredient("");
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4 justify-center items-center">
-      <h2 className="font-bold text-2xl m-4">{heading}</h2>
+      <h2 className="font-bold text-5xl m-4">{heading}</h2>
 
       <div>
         <input
           type="text"
           value={currentIngredient}
           onChange={(e) => setCurrentIngredient(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleAddIngredient(currentIngredient);
+            }
+          }}
           placeholder="e.g., chicken"
           className="border border-gray-300 rounded-lg px-2 py-1 mr-2"
         />
         <button
           className="sous-button"
-          onClick={() => addIngredient(currentIngredient)}
+          onClick={() => handleAddIngredient(currentIngredient)}
         >
           Add
         </button>
@@ -38,13 +52,13 @@ export default function RecipeFinder({
         <ul>
           <strong>Your Ingredients List:</strong>
           {ingredients.map((ingredient: string, index: number) => (
-            <li key={index}>
+            <li className="flex justify-between" key={index}>
               {ingredient}{" "}
               <button
-                className="rounded-full bg-accent p-1"
+                className=" bg-red-200 p-1 m-1 rounded-full cursor-pointer"
                 onClick={() => removeIngredient(ingredient)}
               >
-                x
+                <X size={10} />
               </button>
             </li>
           ))}
@@ -58,7 +72,7 @@ export default function RecipeFinder({
       >
         {isLoading ? "Searching..." : "Search Recipes"}
       </button>
-      <button onClick={() => clearIngredients} className="sous-button">
+      <button onClick={clearIngredients} className="sous-button">
         Refresh List
       </button>
 

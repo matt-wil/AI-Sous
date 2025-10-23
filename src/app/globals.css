@@ -1,7 +1,26 @@
 @import "tailwindcss";
 
+.color-swatch-light {
+    --primary: hsl(0, 0%, 88%);
+    --secondary: hsl(0, 0%, 7%);
+    --accent: hsl(257, 29%, 32%);
+    --text: hsl(0, 0%, 80%);
+    --border: hsl(20, 50%, 80%);
+    --surface: hsl(220, 15%, 98%);
+}
+
+.color-swatch-dark {
+    --primary: hsl(0, 0%, 88%);
+    --secondary: hsl(0, 0%, 92%);
+    --accent: hsl(250, 71%, 68%);
+    --text: hsl(0, 0%, 20%);
+    --border: hsl(220, 85%, 20%);
+    --surface: hsl(220, 85%, 2%);
+}
+
+/* Light mode */
 :root {
-    --primary: 0, 0%, 22%;
+    --primary: 0, 0%, 90%;
     --secondary: 0, 0%, 7%;
     --accent: 257, 29%, 32%;
     --text: 0, 0%, 80%;
@@ -21,21 +40,16 @@
     --color-surface: hsl(var(--surface));
 }
 
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
     :root {
         --primary: 0, 0%, 88%;
         --secondary: 0, 0%, 92%;
-        --accent: 110, 71%, 68%;
+        --accent: 250, 71%, 68%;
         --text: 0, 0%, 20%;
         --border: 220, 85%, 20%;
         --surface: 220, 85%, 2%;
     }
-}
-
-body {
-    background: var(--background);
-    color: var(--foreground);
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {

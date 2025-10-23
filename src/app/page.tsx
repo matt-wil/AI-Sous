@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <main>
         <div className="flex items-baseline justify-center">
-          <h1 className="font-bold text-9xl text-accent pb-5">Ai-Sous</h1>
+          <h1 className="font-bold text-9xl text-accent pb-5 m-8">Ai-Sous</h1>
           <Image
             src="/ai-sous.svg"
             alt="Image of Ai-Sous logo"

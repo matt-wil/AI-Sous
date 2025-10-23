@@ -52,13 +52,11 @@ export default function Page() {
         error={error}
       />
       <div
-        className="flex justify-center items-center gap-4 flex-wrap"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-8 place-items-center"
         style={{ marginTop: "20px" }}
       >
         {recipes.map((recipe, index) => (
-          <div className="max-w-20" key={index}>
-            <ApiRecipeCard recipe={recipe} />
-          </div>
+          <ApiRecipeCard key={index} recipe={recipe} />
         ))}
       </div>
     </>
