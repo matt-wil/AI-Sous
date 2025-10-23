@@ -1,3 +1,12 @@
+export type Ingredient = string;
+
+export type RecipeFinderProps = {
+  onClickSearchAction: () => void;
+  heading: string;
+  isLoading: boolean;
+  error: string | null;
+};
+
 export type Recipe = {
   name: string;
   ingredients: string[];
