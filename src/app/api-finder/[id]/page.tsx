@@ -17,14 +17,7 @@ async function getRecipeInfoForPage(
   id: string,
 ): Promise<SpoonacularRecipeInformation | null> {
   try {
-    const absoluteUrl = new URL(
-      `/api/recipe-instructions?id=${id}`,
-      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
-    ).toString();
-
-    console.log(`[Page: ${id}] Fetching internal API: ${absoluteUrl}`);
-
-    const res = await fetch(absoluteUrl, {
+    const res = await fetch(`/api/recipe-instructions?id=${id}`, {
       cache: "no-store",
     });
 
