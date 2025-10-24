@@ -26,23 +26,32 @@ export default function Page() {
     const ingredientQuery = ingredients.join(",");
 
     try {
-      const response = await fetch(
-        `/api/search-recipes?ingredients=${encodeURIComponent(ingredientQuery)}`,
-      );
+          const response = await fetch(
+            `/api/search-recipes?ingredients=${encodeURIComponent(ingredientQuery)}`,
+          );
 
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error || "Failed to fetch recipes");
-      }
+          if (!response.ok) {
+            const err = await response.json().catch(() => ({ error: `HTTP Error: ${response.status} ${response.statusText}` }));
+            throw new Error(err.error || "Failed to fetch recipes");
+          }
 
-      const data: SpoonacularRecipeResult[] = await response.json();
-      setRecipes(data);
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+          const data: SpoonacularRecipeResult[] = await response.json();
+          setRecipes(data);
+
+        } catch (err: unknown) {
+          console.error("Error fetching API recipes:", err);
+          let errorMessage = "An unexpected error occurred while fetching recipes.";
+          if (err instanceof Error) {
+            errorMessage = err.message;
+          } else if (typeof err === 'string') {
+            errorMessage = err;
+          }
+          setError(errorMessage);
+          setRecipes([]);
+
+        } finally {
+          setIsLoading(false);
+        }
 
   return (
     <main className="flex justify-center items-center flex-col">
