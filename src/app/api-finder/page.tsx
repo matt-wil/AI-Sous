@@ -31,14 +31,24 @@ export default function Page() {
       );
 
       if (!response.ok) {
-        const err = await response.json();
+        const err = await response.json().catch(() => ({
+          error: `HTTP Error: ${response.status} ${response.statusText}`,
+        }));
         throw new Error(err.error || "Failed to fetch recipes");
       }
 
       const data: SpoonacularRecipeResult[] = await response.json();
       setRecipes(data);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      console.error("Error fetching API recipes:", err);
+      let errorMessage = "An unexpected error occurred while fetching recipes.";
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      } else if (typeof err === "string") {
+        errorMessage = err;
+      }
+      setError(errorMessage);
+      setRecipes([]);
     } finally {
       setIsLoading(false);
     }
