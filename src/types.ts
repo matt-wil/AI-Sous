@@ -5,6 +5,8 @@ export type RecipeFinderProps = {
   heading: string;
   isLoading: boolean;
   error: string | null;
+  buttonLabel: string;
+  buttonClickedLabel: string;
 };
 
 export type Recipe = {

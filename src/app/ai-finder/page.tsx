@@ -51,16 +51,18 @@ export default function Page() {
   console.log("Recipes: ", recipes);
 
   return (
-    <main>
-      <Link href="/" className="m-4 sous-button">
-        Home
+    <main className="flex justify-center items-center flex-col">
+      <Link href="/" className="m-4 sous-button text-center">
+        Back to the Start
       </Link>
       {!recipes && (
         <RecipeFinder
           onClickSearchAction={handleSearch}
-          heading="Let's see what are sous chef can whip up for us with the ingredients we have!"
+          heading="Let's see what our Sous Chef can whip up for us today!"
           isLoading={isLoading}
           error={error}
+          buttonLabel="Create Recipes"
+          buttonClickedLabel="Creating Recipes..."
         />
       )}
       {recipes && (

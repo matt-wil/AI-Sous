@@ -45,15 +45,17 @@ export default function Page() {
   };
 
   return (
-    <>
+    <main className="flex justify-center items-center flex-col">
       <Link href="/" className="m-4 sous-button">
-        Home
+        Back to the Start
       </Link>
       <RecipeFinder
         onClickSearchAction={handleSearch}
-        heading={"API Based Recipe Finder"}
+        heading="Lets see what recipes the people of the world have in store for us!"
         isLoading={isLoading}
         error={error}
+        buttonLabel="Search Recipes"
+        buttonClickedLabel="Searching..."
       />
       <div
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-8 place-items-center"
@@ -63,6 +65,6 @@ export default function Page() {
           <ApiRecipeCard key={index} recipe={recipe} />
         ))}
       </div>
-    </>
+    </main>
   );
 }

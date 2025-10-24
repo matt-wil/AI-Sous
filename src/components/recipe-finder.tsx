@@ -10,6 +10,8 @@ export default function RecipeFinder({
   heading,
   isLoading,
   error,
+  buttonLabel,
+  buttonClickedLabel,
 }: RecipeFinderProps) {
   const { ingredients, addIngredient, clearIngredients, removeIngredient } =
     useIngredientsStore();
@@ -25,7 +27,9 @@ export default function RecipeFinder({
 
   return (
     <div className="flex flex-col gap-4 justify-center items-center">
-      <h2 className="font-bold text-5xl m-4">{heading}</h2>
+      <h2 className="font-bold text-5xl m-4 text-center max-w-1/2">
+        {heading}
+      </h2>
 
       <div>
         <input
@@ -70,10 +74,10 @@ export default function RecipeFinder({
         disabled={isLoading || ingredients.length < 3}
         className="sous-button"
       >
-        {isLoading ? "Searching..." : "Search Recipes"}
+        {isLoading ? `${buttonClickedLabel}` : `${buttonLabel}`}
       </button>
       <button onClick={clearIngredients} className="sous-button">
-        Refresh List
+        Refresh Ingredients List
       </button>
 
       {error && <p style={{ color: "red" }}>{error}</p>}

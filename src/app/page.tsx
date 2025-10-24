@@ -1,5 +1,5 @@
-import { Index } from ".";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -15,8 +15,20 @@ export default function Home() {
           />
         </div>
         <hr className="mx-4" />
-        <div className="flex justify-center items-center text-text-center mt-10 p-2">
-          <Index />
+        <div className="flex flex-col items-center text-center mt-10 p-2 gap-4">
+          <div className="flex justify-center items-center gap-4">
+            <Link className="landing-button" href="/ai-finder">
+              Create Recipe
+            </Link>
+            <Link className="landing-button" href="/api-finder">
+              Search Recipes
+            </Link>
+          </div>
+
+          <p className="text-sm text-accent max-w-md px-2 mt-3">
+            Choose **Create Recipe** for unique recipes dreamed up by our chef,
+            or **Search Recipes** to explore tested recipes from the web.
+          </p>
         </div>
       </main>
     </>
