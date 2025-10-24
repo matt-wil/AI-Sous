@@ -182,3 +182,17 @@ export interface SpoonacularAnalyzedInstructionsResponse {
   name: string;
   steps: SpoonacularInstructionStep[];
 }
+
+interface AiRecipeIngredient {
+  name: string;
+  quantity: string;
+}
+
+export interface AiRecipeResponse {
+  title: string;
+  description: string;
+  ingredients_needed: AiRecipeIngredient[];
+  instructions: string[];
+}
+
+export type AiRecipeApiResponse = AiRecipeResponse[];

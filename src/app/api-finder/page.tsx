@@ -5,6 +5,7 @@ import { SpoonacularRecipeResult } from "@/types";
 import RecipeFinder from "@/components/recipe-finder";
 import { useIngredientsStore } from "@/store/ingredients-store";
 import { ApiRecipeCard } from "@/components/api-recipe-card";
+import Link from "next/link";
 
 export default function Page() {
   const { ingredients } = useIngredientsStore();
@@ -45,6 +46,9 @@ export default function Page() {
 
   return (
     <>
+      <Link href="/" className="m-4 sous-button">
+        Home
+      </Link>
       <RecipeFinder
         onClickSearchAction={handleSearch}
         heading={"API Based Recipe Finder"}
