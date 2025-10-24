@@ -9,29 +9,29 @@ interface ApiRecipeCardProps {
 
 export function ApiRecipeCard({ recipe }: ApiRecipeCardProps) {
   const internalRecipeUrl = `/api-finder/${recipe.id}`;
-
-  const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(recipe.title + " recipe")}`;
+  const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(
+    recipe.title + " recipe",
+  )}`;
 
   return (
-    <div className="w-full max-w-sm rounded overflow-hidden shadow-lg border bg-surface flex flex-col h-full p-2">
+    <div className="w-full max-w-sm rounded-lg overflow-hidden shadow-lg border border-accent bg-surface flex flex-col h-full p-2">
       <Link href={internalRecipeUrl} className="group block">
-        <div className="relative w-full aspect-[312/231] group-hover:opacity-80 transition-opacity">
+        <div className="relative w-full aspect-[312/231] group-hover:opacity-80 transition-opacity rounded-md overflow-hidden">
           <Image
             src={recipe.image}
             alt={recipe.title}
             fill
             style={{ objectFit: "cover" }}
+            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 40vw, 300px"
           />
         </div>
-        <div className="px-4 pt-3">
-          <h3 className="font-semibold text-md mb-1 truncate group-hover:underline">
+        <div className="px-2 pt-3">
+          <h3 className="font-semibold text-md mb-1 truncate group-hover:underline text-foreground">
             {recipe.title}
           </h3>
         </div>
       </Link>
-
-      {/* Details section */}
-      <div className="px-4 pb-3 mt-auto flex justify-between items-center text-xs text-gray-600">
+      <div className="px-2 pb-2 mt-auto flex justify-between items-center text-xs text-accent">
         <div>
           {recipe.likes !== undefined && <span>Likes: {recipe.likes}</span>}
           {recipe.missedIngredientCount !== undefined && (
@@ -40,13 +40,11 @@ export function ApiRecipeCard({ recipe }: ApiRecipeCardProps) {
             </span>
           )}
         </div>
-
-        {/* Link to Google Search */}
         <a
           href={googleSearchUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center text-blue-600 hover:underline"
+          className="flex items-center text-accent hover:underline"
           title={`Search Google for "${recipe.title}"`}
         >
           Google

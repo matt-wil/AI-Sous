@@ -70,9 +70,9 @@ export default async function RecipeDetailPage({
   }
 
   return (
-    <>
+    <main className="flex justify-center items-center flex-col">
       <Link href="/" className="m-4 sous-button">
-        Home
+        Back to the Start
       </Link>
       <div className="p-4 md:p-8 max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold mb-6 text-center">{recipe.title}</h1>
@@ -137,6 +137,6 @@ export default async function RecipeDetailPage({
           )}
         </div>
       </div>
-    </>
+    </main>
   );
 }

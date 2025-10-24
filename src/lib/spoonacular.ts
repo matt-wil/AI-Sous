@@ -20,7 +20,7 @@ export async function searchRecipesViaIngredients(
   }
   const ingredientsToString = ingredients.join(",");
 
-  const fullUrl = `${spoonacularBaseUrl}/findByIngredients?ingredients=${ingredientsToString}&apiKey=${spoonacularApiKey}`;
+  const fullUrl = `${spoonacularBaseUrl}/findByIngredients?ingredients=${ingredientsToString}&number=9&apiKey=${spoonacularApiKey}`;
 
   try {
     const response = await fetch(fullUrl);

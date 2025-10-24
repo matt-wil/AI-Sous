@@ -41,7 +41,7 @@ export default function RecipeFinder({
               handleAddIngredient(currentIngredient);
             }
           }}
-          placeholder="e.g., chicken"
+          placeholder="e.g., rice"
           className="border border-gray-300 rounded-lg px-2 py-1 mr-2"
         />
         <button

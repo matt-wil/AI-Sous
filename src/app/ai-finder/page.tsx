@@ -71,7 +71,7 @@ export default function Page() {
             ← Search Again
           </button>
 
-          <div className="flex justify-center flex-wrap gap-4 px-4 w-full">
+          <div className="flex justify-center items-start flex-wrap gap-4 px-4 w-full">
             {Array.isArray(recipes) &&
               recipes.map((recipe, index) => {
                 if (!recipe) return null;

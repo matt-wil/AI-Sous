@@ -18,7 +18,7 @@ export default function Home() {
         <div className="flex flex-col items-center text-center mt-10 p-2 gap-4">
           <div className="flex justify-center items-center gap-4">
             <Link className="landing-button" href="/ai-finder">
-              Create Recipe
+              Generate Recipes
             </Link>
             <Link className="landing-button" href="/api-finder">
               Search Recipes
@@ -26,8 +26,8 @@ export default function Home() {
           </div>
 
           <p className="text-sm text-accent max-w-md px-2 mt-3">
-            Choose **Create Recipe** for unique recipes dreamed up by our chef,
-            or **Search Recipes** to explore tested recipes from the web.
+            Choose **Generate Recipes** for unique recipes dreamed up by our
+            chef, or **Search Recipes** to explore tested recipes from the web.
           </p>
         </div>
       </main>
