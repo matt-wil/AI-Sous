@@ -1,11 +1,11 @@
 import Image from "next/image";
-
+import Link from "next/link";
 import {
   SpoonacularRecipeInformation,
   SpoonacularExtendedIngredient,
   SpoonacularInstructionStep,
 } from "@/types";
-import Link from "next/link";
+import { getRecipeInformationViaId } from "@/lib/spoonacular";
 
 interface RecipeDetailPageProps {
   params: {
@@ -13,66 +13,41 @@ interface RecipeDetailPageProps {
   };
 }
 
-async function getRecipeInfoForPage(
-  id: string,
-): Promise<SpoonacularRecipeInformation | null> {
-  try {
-    const absoluteUrl = new URL(
-      `/api/recipe-instructions?id=${id}`,
-      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
-    ).toString();
-
-    console.log(`[Page: ${id}] Fetching internal API: ${absoluteUrl}`);
-
-    const res = await fetch(absoluteUrl, {
-      cache: "no-store",
-    });
-
-    console.log(`[Page: ${id}] Internal API status: ${res.status}`);
-
-    if (!res.ok) {
-      let errorBody = `Status: ${res.status}, StatusText: ${res.statusText}`;
-      try {
-        const errJson = await res.json();
-        errorBody = errJson.error || JSON.stringify(errJson);
-      } catch (e) {}
-      console.error("Failed to fetch from internal API:", errorBody);
-      return null;
-    }
-
-    const recipeInfo: SpoonacularRecipeInformation = await res.json();
-    return recipeInfo;
-  } catch (error) {
-    console.error(`[Page: ${id}] Error fetching recipe info on page:`, error);
-    return null;
-  }
-}
-
 export default async function RecipeDetailPage({
   params,
 }: RecipeDetailPageProps) {
-  const recipeId = params.id;
+  const recipeId = await params.id;
 
-  const recipe = await getRecipeInfoForPage(recipeId);
-  const steps = recipe?.analyzedInstructions?.[0]?.steps || [];
-  const plainInstructions = recipe?.instructions || "";
+  console.log(
+    `[Page: ${recipeId}] Calling getRecipeInformationById directly...`,
+  );
+  const recipe = await getRecipeInformationViaId(recipeId);
 
   if (!recipe) {
+    console.error(
+      `[Page: ${recipeId}] getRecipeInformationById returned null.`,
+    );
     return (
       <div className="p-4">
         <h1 className="text-2xl font-bold mb-4 text-red-600">
           Recipe Not Found (or Fetch Failed)
         </h1>
         <p>Could not retrieve details for recipe ID: {recipeId}.</p>
-        <p>Check the server console logs for fetch errors.</p>
+        <p>
+          Check the server console or Vercel Runtime Logs for errors in
+          getRecipeInformationById.
+        </p>
       </div>
     );
   }
 
+  const steps = recipe?.analyzedInstructions?.[0]?.steps || [];
+  const plainInstructions = recipe?.instructions || "";
+
   return (
     <main className="flex justify-center items-center flex-col">
-      <Link href="/" className="m-4 sous-button">
-        Back to the Start
+      <Link href="/api-finder" className="m-4 sous-button">
+        Back to Search
       </Link>
       <div className="p-4 md:p-8 max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold mb-6 text-center">{recipe.title}</h1>
